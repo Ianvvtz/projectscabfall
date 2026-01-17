@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://2giwd861bira"]
+
+[ext_resource type="Script" uid="uid://bv487urfdn0iy" path="res://scripts/hurtbox.gd" id="1_ksusc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lainr"]
+radius = 16.0
+
+[node name="Hurtbox" type="Area2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_ksusc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_lainr")
+debug_color = Color(1, 0, 0, 0.41960785)
