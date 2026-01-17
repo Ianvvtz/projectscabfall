@@ -16,7 +16,7 @@ const FRICTION: int = 8
 @export var dodge_cooldown: float = 0.5
 @export var health: int = 100
 @export var attack_damage: int = 25
-@export var attack_cooldown: float = 0.3
+@export var attack_cooldown: float = 0.2
 
 enum Faction {
 	PLAYER,
@@ -27,7 +27,6 @@ enum Faction {
 
 #State Machine
 enum PlayerState {
-	#IDLE,
 	MOVE,
 	ATTACK,
 	DEAD,
@@ -59,8 +58,6 @@ func _process(delta: float) -> void:
 	attack_timer = max(0, attack_timer - delta)
 	dodge_timer = max(0, dodge_timer - delta)
 	match state:
-		#PlayerState.IDLE:
-			#handle_idle()
 		PlayerState.MOVE:
 			handle_move(delta)
 		PlayerState.ATTACK:
@@ -78,10 +75,7 @@ func handle_idle():
 
 func handle_move(delta) -> void:
 	anim.play("move")
-	
-	#if input_vector.length() == 0:
-		#state = PlayerState.IDLE
-		#return
+
 	if Input.is_action_just_pressed("left_click") and attack_timer <= 0:
 		start_attack()
 		return
@@ -102,7 +96,6 @@ func dodge():
 	anim.play("dodge")
 	dodge_timer = dodge_cooldown
 	velocity = input_vector * dodge_distance / dodge_duration
-	# You'll need to lock state during dodge animation
 
 
 func start_attack():
@@ -110,11 +103,9 @@ func start_attack():
 	attack_timer = attack_cooldown
 	weapon_holder.get_child(0).set_active(true)
 	anim.play("attack")
-	# Deal damage in weapon hitbox
 
 
 func handle_attack(delta):
-	# Wait for attack animation to finish
 	if not anim.is_playing():
 		weapon_holder.get_child(0).set_active(false)
 		state = PlayerState.MOVE
