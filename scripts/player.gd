@@ -6,9 +6,6 @@ extends CharacterBody2D
 @onready var hurtbox: Hurtbox = $Hurtbox
 
 #Player Stats
-const MAX_SPEED: int = 400
-const ACCELERATION: int = 5
-const FRICTION: int = 8
 @export var speed: float = 200
 @export var sprint_multiplier: float = 2.0
 @export var dodge_distance: float = 200
@@ -38,7 +35,13 @@ var attack_timer: float = 0.0
 var dodge_timer: float = 0.0
 
 #Movement
+var dodge_direction: Vector2
+var is_dodging: bool = false
+var dodge_time_left: float
 var input_vector: Vector2 = Vector2.ZERO
+var last_move_direction: Vector2
+
+var is_invulnerable := false
 
 
 func _ready() -> void:
@@ -65,15 +68,19 @@ func _process(delta: float) -> void:
 		PlayerState.DEAD:
 			handle_dead()
 
-
-func handle_idle():
-	anim.play("idle")
-	if input_vector.length() > 0:
-		state = PlayerState.MOVE
-	elif Input.is_action_just_pressed("left_click"):
-		start_attack()
+#
+#func handle_idle():
+	#anim.play("idle")
+	#if input_vector.length() > 0:
+		#state = PlayerState.MOVE
+	#elif Input.is_action_just_pressed("left_click"):
+		#start_attack()
 
 func handle_move(delta) -> void:
+	if is_dodging:
+		handle_dodge(delta)
+		return
+	
 	anim.play("move")
 
 	if Input.is_action_just_pressed("left_click") and attack_timer <= 0:
@@ -87,15 +94,36 @@ func handle_move(delta) -> void:
 	if Input.is_action_pressed("sprint"):
 		current_speed *= sprint_multiplier
 	
-	var lerp_weight = delta * ACCELERATION
-	velocity = lerp(velocity, input_vector * current_speed, lerp_weight)
+	if input_vector != Vector2.ZERO:
+		last_move_direction = input_vector.normalized() # Or set this to dodge left
+	
+	velocity = input_vector * current_speed
 	move_and_slide()
 
 
 func dodge():
+	is_invulnerable = true
 	anim.play("dodge")
 	dodge_timer = dodge_cooldown
-	velocity = input_vector * dodge_distance / dodge_duration
+	is_dodging = true
+	dodge_time_left = dodge_duration
+
+	if input_vector != Vector2.ZERO:
+		dodge_direction = input_vector.normalized()
+	else:
+		dodge_direction = last_move_direction
+
+
+func handle_dodge(delta) -> void:
+	dodge_time_left -= delta
+
+	velocity = dodge_direction * (dodge_distance / dodge_duration)
+	move_and_slide()
+
+	if dodge_time_left <= 0:
+		is_dodging = false
+		is_invulnerable = false
+		velocity = Vector2.ZERO
 
 
 func start_attack():
@@ -112,7 +140,8 @@ func handle_attack(delta):
 
 
 func handle_dead():
-	self.queue_free()
+	print("Player got hit")
+	# handle death
 
 
 func _on_hurtbox_died() -> void:

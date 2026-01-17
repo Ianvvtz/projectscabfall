@@ -15,13 +15,28 @@ texture = ExtResource("1_o5qli")
 position = Vector2(246, -145)
 
 [node name="Enemy2" parent="." instance=ExtResource("3_sugp2")]
-position = Vector2(112, -196)
+position = Vector2(37, -235)
 
 [node name="Enemy3" parent="." instance=ExtResource("3_sugp2")]
-position = Vector2(202, 3)
+position = Vector2(161, -243)
 
 [node name="Enemy4" parent="." instance=ExtResource("3_sugp2")]
-position = Vector2(146, -89)
+position = Vector2(322, 56)
 
 [node name="Enemy5" parent="." instance=ExtResource("3_sugp2")]
-position = Vector2(-72, -181)
+position = Vector2(390, -100)
+
+[node name="Enemy6" parent="." instance=ExtResource("3_sugp2")]
+position = Vector2(335, -252)
+
+[node name="Enemy7" parent="." instance=ExtResource("3_sugp2")]
+position = Vector2(511, -188)
+
+[node name="Enemy8" parent="." instance=ExtResource("3_sugp2")]
+position = Vector2(564, 23)
+
+[node name="Enemy9" parent="." instance=ExtResource("3_sugp2")]
+position = Vector2(455, 114)
+
+[node name="Enemy10" parent="." instance=ExtResource("3_sugp2")]
+position = Vector2(562, -88)

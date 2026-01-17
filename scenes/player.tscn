@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://upqtu0gw0byx" path="res://scenes/hitbox.tscn" id="3_qhqgy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u8vuu"]
-radius = 11.0
+radius = 5.0
 
 [sub_resource type="Animation" id="Animation_dqkch"]
 resource_name = "dodge"
@@ -30,12 +30,10 @@ _data = {
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 4
 collision_mask = 2
+motion_mode = 1
 script = ExtResource("1_3vyb7")
 
 [node name="Hurtbox" parent="." instance=ExtResource("2_g2els")]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_u8vuu")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 8
@@ -50,6 +48,9 @@ offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.47058824, 0.039215688, 0.039215688, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_u8vuu")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
