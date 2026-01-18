@@ -11,8 +11,6 @@ extends CharacterBody2D
 @export var dodge_distance: float = 200
 @export var dodge_duration: float = 0.2
 @export var dodge_cooldown: float = 0.5
-@export var health: int = 100
-@export var attack_damage: int = 25
 @export var attack_cooldown: float = 0.2
 
 enum Faction {
@@ -141,6 +139,7 @@ func handle_attack(delta):
 
 func handle_dead():
 	print("Player got hit")
+	get_tree().paused = true
 	# handle death
 
 

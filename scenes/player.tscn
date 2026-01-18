@@ -1,11 +1,16 @@
-[gd_scene load_steps=10 format=3 uid="uid://5rnun75286p7"]
+[gd_scene load_steps=13 format=3 uid="uid://5rnun75286p7"]
 
 [ext_resource type="Script" uid="uid://c7yvv1bi4ew6h" path="res://scripts/player.gd" id="1_3vyb7"]
 [ext_resource type="PackedScene" uid="uid://2giwd861bira" path="res://scenes/hurtbox.tscn" id="2_g2els"]
+[ext_resource type="Texture2D" uid="uid://hxth2crb7hm7" path="res://assets/images/player/Worker.svg" id="3_dqkch"]
 [ext_resource type="PackedScene" uid="uid://upqtu0gw0byx" path="res://scenes/hitbox.tscn" id="3_qhqgy"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_u8vuu"]
-radius = 5.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dqkch"]
+radius = 16.0
+height = 76.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qlg0r"]
+size = Vector2(20, 80)
 
 [sub_resource type="Animation" id="Animation_dqkch"]
 resource_name = "dodge"
@@ -27,41 +32,48 @@ _data = {
 &"sprint": SubResource("Animation_qhqgy")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dqkch"]
+size = Vector2(30, 68)
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 4
 collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_3vyb7")
+attack_cooldown = 0.1
 
-[node name="Hurtbox" parent="." instance=ExtResource("2_g2els")]
-
-[node name="ColorRect" type="ColorRect" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -8.0
-offset_top = -8.0
-offset_right = 8.0
-offset_bottom = 8.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.47058824, 0.039215688, 0.039215688, 1)
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("3_dqkch")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_u8vuu")
+position = Vector2(0, 10)
+shape = SubResource("CapsuleShape2D_dqkch")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.5, 1.5)
 
 [node name="WeaponHolder" type="Node2D" parent="."]
 
 [node name="Hitbox" parent="WeaponHolder" instance=ExtResource("3_qhqgy")]
 collision_mask = 8
 
+[node name="CollisionShape2D" parent="WeaponHolder/Hitbox" index="0"]
+position = Vector2(28, 0)
+shape = SubResource("RectangleShape2D_qlg0r")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_qhqgy")
 }
 
+[node name="Hurtbox" parent="." instance=ExtResource("2_g2els")]
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_dqkch")
+
 [connection signal="died" from="Hurtbox" to="." method="_on_hurtbox_died"]
+
+[editable path="WeaponHolder/Hitbox"]
+[editable path="Hurtbox"]

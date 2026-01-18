@@ -5,7 +5,7 @@ signal died()
 
 func take_damage() -> void:
 	var parent = get_parent()
-	if parent.is_invulnerable:
+	if parent.is_in_group("player") and parent.is_invulnerable:
 		print("Dodged death!")
 		return
 	died.emit()

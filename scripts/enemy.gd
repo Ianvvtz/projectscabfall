@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @onready var hurtbox: Hurtbox = $Hurtbox
 @onready var hitbox: Hitbox = $Hitbox
+@onready var anim: AnimationPlayer = $AnimationPlayer
 
 enum Faction {
 	PLAYER,
@@ -22,9 +23,10 @@ var player: CharacterBody2D
 @export var strafe_speed: float = 70.0
 
 # Attack variables
-@export var attack_pause: float = 0.05
+@export var attack_pause: float = 0.5
 @export var attack_duration: float = 0.15
 @export var attack_cooldown: float = 0.6
+var can_attack: bool = true
 var attack_pause_timer: float = 0.0
 var is_attacking: bool = false
 var attack_timer: float = 0.0
@@ -43,16 +45,25 @@ func _ready() -> void:
 
 
 func _on_hurtbox_died() -> void:
+	can_attack = false
+	anim.play("hit")
+	
 	print("Enemy got hit")
+
+
+func enemy_die() -> void:
 	queue_free()
+
 
 func _physics_process(delta: float) -> void:
 	ai_behavior(delta)
 
+
 func ai_behavior(delta):
 	velocity = Vector2.ZERO
 
-	if attack_pause_timer > 0:
+	if attack_pause_timer > 0 and can_attack:
+		anim.play("attack_windup")
 		attack_pause_timer -= delta
 		if attack_pause_timer <= 0:
 			hitbox.set_active(true)
@@ -77,9 +88,14 @@ func ai_behavior(delta):
 			strafe_attack(delta)
 	
 	if not is_attacking and attack_timer <= 0:
-		if global_position.distance_to(player.hurtbox.global_position) <= attack_range:
+		if global_position.distance_to(player.hurtbox.global_position) <= attack_range and can_attack:
 			start_attack()
 	move_and_slide()
+
+
+#func attac_windup() -> void:
+	
+
 
 # --- Movement Functions ---
 func chase_player(_delta):
@@ -95,6 +111,8 @@ func strafe_attack(_delta):
 
 # --- Attack Functions ---
 func start_attack():
+	if not can_attack:
+		return
 	is_attacking = true
 	attack_pause_timer = attack_pause
 	attack_timer = attack_duration
