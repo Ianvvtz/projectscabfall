@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://5rnun75286p7"]
+[gd_scene load_steps=16 format=3 uid="uid://5rnun75286p7"]
 
 [ext_resource type="Script" uid="uid://c7yvv1bi4ew6h" path="res://scripts/player.gd" id="1_3vyb7"]
 [ext_resource type="PackedScene" uid="uid://2giwd861bira" path="res://scenes/hurtbox.tscn" id="2_g2els"]
 [ext_resource type="Texture2D" uid="uid://hxth2crb7hm7" path="res://assets/images/player/Worker.svg" id="3_dqkch"]
 [ext_resource type="PackedScene" uid="uid://upqtu0gw0byx" path="res://scenes/hitbox.tscn" id="3_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://hqcjkg7dp0o3" path="res://assets/images/lightsource1.png" id="5_qlg0r"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dqkch"]
 
@@ -54,6 +55,14 @@ script = ExtResource("1_3vyb7")
 speed = 120.0
 dodge_distance = 150.0
 
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.4627451, 0.12941177, 0.12941177, 1)
+energy = 0.5
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+texture = ExtResource("5_qlg0r")
+texture_scale = 5.0
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5707964
 scale = Vector2(0.3, 0.3)
@@ -63,7 +72,7 @@ texture = ExtResource("3_dqkch")
 shape = SubResource("CircleShape2D_dqkch")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(1.5, 1.5)
+zoom = Vector2(2.5, 2.5)
 
 [node name="WeaponHolder" type="Node2D" parent="."]
 
