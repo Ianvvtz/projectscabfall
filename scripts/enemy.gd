@@ -18,6 +18,7 @@ var current_behavior: Behavior = Behavior.CHASE
 var behavior_timer: float = 0.0
 
 var player: CharacterBody2D
+var distance_to_player: float
 @export var faction: Faction
 @export var move_speed: float = 100.0
 @export var strafe_speed: float = 70.0
@@ -25,12 +26,12 @@ var player: CharacterBody2D
 # Attack variables
 @export var attack_pause: float = 0.5
 @export var attack_duration: float = 0.15
-@export var attack_cooldown: float = 0.6
 var can_attack: bool = true
 var attack_pause_timer: float = 0.0
 var is_attacking: bool = false
 var attack_timer: float = 0.0
 var attack_range: float
+var chase_range: float = 200.0
 
 
 func _ready() -> void:
@@ -40,14 +41,12 @@ func _ready() -> void:
 	if hitbox.get_shape() is CircleShape2D:
 		attack_range = hitbox.get_shape().radius
 	elif hitbox.get_shape() is RectangleShape2D:
-		var rect = hitbox.get_shape().extents
-		attack_range = rect.length()
+		attack_range = hitbox.get_shape().size.x
 
 
 func _on_hurtbox_died() -> void:
 	can_attack = false
 	anim.play("hit")
-	
 	print("Enemy got hit")
 
 
@@ -57,44 +56,45 @@ func enemy_die() -> void:
 
 func _physics_process(delta: float) -> void:
 	ai_behavior(delta)
+	look_at(player.global_position)
 
 
 func ai_behavior(delta):
 	velocity = Vector2.ZERO
-
+	distance_to_player = global_position.distance_to(player.global_position)
+	
 	if attack_pause_timer > 0 and can_attack:
 		anim.play("attack_windup")
-		attack_pause_timer -= delta
+		attack_pause_timer = max(0, attack_pause_timer - delta)
 		if attack_pause_timer <= 0:
 			hitbox.set_active(true)
 		return
+
+
+	if not is_attacking and attack_timer <= 0:
+		if distance_to_player <= attack_range and can_attack:
+			start_attack()
 
 	if is_attacking:
 		attack_timer -= delta
 		if attack_timer <= 0:
 			end_attack()
 		return
-	
-	# Behavior
+
 	behavior_timer -= delta
+	if distance_to_player < chase_range:
+		current_behavior = Behavior.CHASE
 	if behavior_timer <= 0:
 		current_behavior = Behavior.STRAFE if current_behavior == Behavior.CHASE else Behavior.CHASE
 		behavior_timer = randf_range(2.0, 4.0)
-	
+
 	match current_behavior:
 		Behavior.CHASE:
 			chase_player(delta)
 		Behavior.STRAFE:
 			strafe_attack(delta)
-	
-	if not is_attacking and attack_timer <= 0:
-		if global_position.distance_to(player.hurtbox.global_position) <= attack_range and can_attack:
-			start_attack()
+
 	move_and_slide()
-
-
-#func attac_windup() -> void:
-	
 
 
 # --- Movement Functions ---
@@ -123,4 +123,4 @@ func start_attack():
 func end_attack():
 	is_attacking = false
 	hitbox.set_active(false)
-	attack_timer = attack_cooldown
+	

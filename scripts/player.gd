@@ -53,6 +53,7 @@ func _physics_process(_delta: float) -> void:
 		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
 		Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
 		).normalized()
+	look_at(get_global_mouse_position())
 
 
 func _process(delta: float) -> void:
@@ -66,13 +67,6 @@ func _process(delta: float) -> void:
 		PlayerState.DEAD:
 			handle_dead()
 
-#
-#func handle_idle():
-	#anim.play("idle")
-	#if input_vector.length() > 0:
-		#state = PlayerState.MOVE
-	#elif Input.is_action_just_pressed("left_click"):
-		#start_attack()
 
 func handle_move(delta) -> void:
 	if is_dodging:
@@ -132,15 +126,14 @@ func start_attack():
 
 
 func handle_attack(delta):
-	if not anim.is_playing():
+	if attack_timer <= 0:
 		weapon_holder.get_child(0).set_active(false)
 		state = PlayerState.MOVE
-
 
 func handle_dead():
 	print("Player got hit")
 	get_tree().paused = true
-	# handle death
+	# TODO handle death
 
 
 func _on_hurtbox_died() -> void:

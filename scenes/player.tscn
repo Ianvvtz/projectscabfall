@@ -1,16 +1,22 @@
-[gd_scene load_steps=13 format=3 uid="uid://5rnun75286p7"]
+[gd_scene load_steps=15 format=3 uid="uid://5rnun75286p7"]
 
 [ext_resource type="Script" uid="uid://c7yvv1bi4ew6h" path="res://scripts/player.gd" id="1_3vyb7"]
 [ext_resource type="PackedScene" uid="uid://2giwd861bira" path="res://scenes/hurtbox.tscn" id="2_g2els"]
 [ext_resource type="Texture2D" uid="uid://hxth2crb7hm7" path="res://assets/images/player/Worker.svg" id="3_dqkch"]
 [ext_resource type="PackedScene" uid="uid://upqtu0gw0byx" path="res://scenes/hitbox.tscn" id="3_qhqgy"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dqkch"]
-radius = 16.0
-height = 76.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_dqkch"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qlg0r"]
-size = Vector2(20, 80)
+size = Vector2(26, 26)
+
+[sub_resource type="Animation" id="Animation_qlg0r"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_tuyoq"]
+resource_name = "attack"
+length = 0.2
+step = 0.1
 
 [sub_resource type="Animation" id="Animation_dqkch"]
 resource_name = "dodge"
@@ -20,35 +26,41 @@ resource_name = "idle"
 
 [sub_resource type="Animation" id="Animation_g2els"]
 resource_name = "move"
+length = 0.6
+loop_mode = 1
+step = 0.1
 
 [sub_resource type="Animation" id="Animation_qhqgy"]
 resource_name = "sprint"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qhqgy"]
 _data = {
+&"RESET": SubResource("Animation_qlg0r"),
+&"attack": SubResource("Animation_tuyoq"),
 &"dodge": SubResource("Animation_dqkch"),
 &"idle": SubResource("Animation_3vyb7"),
 &"move": SubResource("Animation_g2els"),
 &"sprint": SubResource("Animation_qhqgy")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dqkch"]
-size = Vector2(30, 68)
+[sub_resource type="CircleShape2D" id="CircleShape2D_qlg0r"]
+radius = 11.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 4
 collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_3vyb7")
-attack_cooldown = 0.1
+speed = 120.0
+dodge_distance = 150.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.05, 0.05)
+rotation = 1.5707964
+scale = Vector2(0.3, 0.3)
 texture = ExtResource("3_dqkch")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 10)
-shape = SubResource("CapsuleShape2D_dqkch")
+shape = SubResource("CircleShape2D_dqkch")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.5, 1.5)
@@ -59,7 +71,7 @@ zoom = Vector2(1.5, 1.5)
 collision_mask = 8
 
 [node name="CollisionShape2D" parent="WeaponHolder/Hitbox" index="0"]
-position = Vector2(28, 0)
+position = Vector2(13, 0)
 shape = SubResource("RectangleShape2D_qlg0r")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -70,8 +82,7 @@ libraries = {
 [node name="Hurtbox" parent="." instance=ExtResource("2_g2els")]
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-position = Vector2(0, -4)
-shape = SubResource("RectangleShape2D_dqkch")
+shape = SubResource("CircleShape2D_qlg0r")
 
 [connection signal="died" from="Hurtbox" to="." method="_on_hurtbox_died"]
 
