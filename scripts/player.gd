@@ -6,9 +6,9 @@ extends CharacterBody2D
 @onready var hurtbox: Hurtbox = $Hurtbox
 
 #Player Stats
-@export var speed: float = 200
+@export var speed: float = 200.0
 @export var sprint_multiplier: float = 2.0
-@export var dodge_distance: float = 200
+@export var dodge_distance: float = 200.0
 @export var dodge_duration: float = 0.2
 @export var dodge_cooldown: float = 0.5
 @export var attack_cooldown: float = 0.3
@@ -31,6 +31,7 @@ var state: PlayerState = PlayerState.MOVE
 #Timers
 var attack_timer: float = 0.0
 var dodge_timer: float = 0.0
+var boost_timer: float = 0.0
 
 #Movement
 var dodge_direction: Vector2
@@ -38,6 +39,9 @@ var is_dodging: bool = false
 var dodge_time_left: float
 var input_vector: Vector2 = Vector2.ZERO
 var last_move_direction: Vector2
+var boost_speed: float = 100.0
+var received_boost: bool = false
+var boost_time: float = 5.0
 
 var is_invulnerable := false
 
@@ -69,6 +73,13 @@ func _process(delta: float) -> void:
 
 
 func handle_move(delta) -> void:
+	if received_boost:
+		boost_timer = (max(0, boost_timer - delta))
+
+	if boost_timer == 0.0 and received_boost:
+		speed -= boost_speed
+		received_boost = false
+
 	if is_dodging:
 		handle_dodge(delta)
 		return
@@ -123,6 +134,9 @@ func start_attack():
 	attack_timer = attack_cooldown
 	weapon_holder.get_child(0).set_active(true)
 	apply_screen_shake()
+	var tween = create_tween()
+	tween.tween_property(weapon_holder, "position:x", 20, 0.1)  # Forward
+	tween.tween_property(weapon_holder, "position:x", 0, 0.1)  # Back to rest
 	anim.play("attack")
 
 
@@ -131,9 +145,10 @@ func handle_attack(delta):
 		weapon_holder.get_child(0).set_active(false)
 		state = PlayerState.MOVE
 
+
 func handle_dead():
 	print("Player got hit")
-	#get_tree().paused = true
+	get_tree().paused = true
 	# TODO handle death
 
 
@@ -142,7 +157,7 @@ func _on_hurtbox_died() -> void:
 	state = PlayerState.DEAD
 
 
-func apply_screen_shake(intensity: float = 3.0):
+func apply_screen_shake(intensity: float = 8.0):
 	var camera = get_viewport().get_camera_2d()
 	if camera:
 		var shake_offset = Vector2(
@@ -152,3 +167,12 @@ func apply_screen_shake(intensity: float = 3.0):
 		camera.offset = shake_offset
 		await get_tree().create_timer(0.1).timeout
 		camera.offset = Vector2.ZERO
+
+
+func speed_boost() -> void:
+	if not received_boost:
+		received_boost = true
+		boost_timer = boost_time
+		speed += boost_speed
+	else:
+		return

@@ -15,6 +15,11 @@ run/main_scene="uid://hdv3jrgdaea5"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://assets/images/icon.svg"
 
+[autoload]
+
+Signalbus="*res://globals/signalbus.gd"
+SceneTransition="*res://globals/scene_transition.tscn"
+
 [display]
 
 window/size/viewport_width=1920

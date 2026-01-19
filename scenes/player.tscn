@@ -25,7 +25,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(18.5, 3)]
+"values": [Vector2(18.5, 9)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -37,7 +37,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(18, 3)]
+"values": [Vector2(18, 9)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -102,7 +102,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(18.5, 3), Vector2(19, -7), Vector2(19, 10.000002), Vector2(18.5, 3)]
+"values": [Vector2(18.5, 9), Vector2(19, -7), Vector2(19, 10.000002), Vector2(18.5, 9)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -114,7 +114,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(18.000002, 3), Vector2(19, -6.9999995), Vector2(19, 10), Vector2(18.000002, 3)]
+"values": [Vector2(18, 9), Vector2(19, -6.9999995), Vector2(19, 10), Vector2(18, 9)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -219,7 +219,7 @@ texture = ExtResource("3_dqkch")
 shape = SubResource("CircleShape2D_dqkch")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
+zoom = Vector2(1.8, 1.8)
 position_smoothing_enabled = true
 position_smoothing_speed = 4.0
 
@@ -229,11 +229,11 @@ position_smoothing_speed = 4.0
 collision_mask = 8
 
 [node name="CollisionShape2D" parent="WeaponHolder/Hitbox" index="0"]
-position = Vector2(18.5, 3)
+position = Vector2(18.5, 9)
 shape = SubResource("RectangleShape2D_qlg0r")
 
 [node name="WeaponSprite" type="Sprite2D" parent="WeaponHolder"]
-position = Vector2(18, 3)
+position = Vector2(18, 9)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("4_tuyoq")
 
