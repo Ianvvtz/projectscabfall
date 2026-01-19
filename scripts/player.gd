@@ -11,7 +11,7 @@ extends CharacterBody2D
 @export var dodge_distance: float = 200
 @export var dodge_duration: float = 0.2
 @export var dodge_cooldown: float = 0.5
-@export var attack_cooldown: float = 0.2
+@export var attack_cooldown: float = 0.3
 
 enum Faction {
 	PLAYER,
