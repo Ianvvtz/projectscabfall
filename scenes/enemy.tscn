@@ -1,16 +1,17 @@
-[gd_scene load_steps=16 format=3 uid="uid://t0wtkwpgo5tu"]
+[gd_scene load_steps=18 format=3 uid="uid://t0wtkwpgo5tu"]
 
 [ext_resource type="PackedScene" uid="uid://2giwd861bira" path="res://scenes/hurtbox.tscn" id="1_7p1mj"]
 [ext_resource type="Script" uid="uid://c7m5pmh05hya4" path="res://scripts/enemy.gd" id="1_md0e3"]
 [ext_resource type="Material" uid="uid://cw5cetwr8ywvn" path="res://assets/shaders/enemy.tres" id="2_5uy6h"]
 [ext_resource type="PackedScene" uid="uid://upqtu0gw0byx" path="res://scenes/hitbox.tscn" id="3_4ra3w"]
 [ext_resource type="Texture2D" uid="uid://c8plja24b86wr" path="res://assets/images/test enemies/pinkerton.svg" id="3_c4w8v"]
+[ext_resource type="Texture2D" uid="uid://bjsbmrrwwxxx1" path="res://assets/images/weapons/enemy weapons/pinkerton_baton.svg" id="6_xwavj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_c4w8v"]
 radius = 16.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c4w8v"]
-size = Vector2(28, 28)
+size = Vector2(16, 6)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xwavj"]
 
@@ -40,9 +41,147 @@ tracks/1/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.3, 0.3)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WeaponHolder/Hitbox/CollisionShape2D:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("WeaponHolder/Hitbox/CollisionShape2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(18, 3)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WeaponHolder/WeaponSprite:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(18, 3)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("WeaponHolder/WeaponSprite:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_c4w8v"]
 resource_name = "attack"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WeaponHolder/Hitbox/CollisionShape2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(0.5, 0.5, 2, 2),
+"update": 0,
+"values": [0.0, -0.6981317, 0.5235988, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponHolder/Hitbox/CollisionShape2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(18, 3), Vector2(17.999998, -4.0000005), Vector2(18, 9), Vector2(18, 3)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WeaponHolder/WeaponSprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(18, 3), Vector2(18, -3.9999995), Vector2(18, 9), Vector2(18, 3)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WeaponHolder/WeaponSprite:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(0.5, 0.5, 2, 2),
+"update": 0,
+"values": [0.0, -0.6981317, 0.5235988, 0.0]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"end_attack"
+}]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WeaponHolder/Hitbox")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [true],
+"method": &"set_active"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_md484"]
 resource_name = "attack_windup"
@@ -84,7 +223,7 @@ tracks/0/path = NodePath("Sprite2D:material:shader_parameter/flash_pct")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
+"times": PackedFloat32Array(0, 0.1, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0.0, 0.50000002375, 0.0]
@@ -103,6 +242,18 @@ tracks/1/keys = {
 "method": &"enemy_die"
 }]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(0.5, 2, 0.5),
+"update": 0,
+"values": [Vector2(0.3, 0.3), Vector2(0.25, 0.25), Vector2(0.3, 0.3)]
+}
 
 [sub_resource type="Animation" id="Animation_4ra3w"]
 resource_name = "move"
@@ -119,6 +270,9 @@ _data = {
 &"move": SubResource("Animation_4ra3w"),
 &"strafe": SubResource("Animation_5uy6h")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xwavj"]
+size = Vector2(21.5, 29)
 
 [node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 2
@@ -140,10 +294,17 @@ texture = ExtResource("3_c4w8v")
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 shape = SubResource("CircleShape2D_c4w8v")
 
-[node name="Hitbox" parent="." instance=ExtResource("3_4ra3w")]
+[node name="WeaponHolder" type="Node2D" parent="."]
 
-[node name="CollisionShape2D" parent="Hitbox" index="0"]
-position = Vector2(14, 0)
+[node name="WeaponSprite" type="Sprite2D" parent="WeaponHolder"]
+position = Vector2(18, 3)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("6_xwavj")
+
+[node name="Hitbox" parent="WeaponHolder" instance=ExtResource("3_4ra3w")]
+
+[node name="CollisionShape2D" parent="WeaponHolder/Hitbox" index="0"]
+position = Vector2(18, 3)
 shape = SubResource("RectangleShape2D_c4w8v")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -154,7 +315,13 @@ libraries = {
 &"": SubResource("AnimationLibrary_nenq2")
 }
 
+[node name="AttackRangeBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRangeBox"]
+position = Vector2(18, 0)
+shape = SubResource("RectangleShape2D_xwavj")
+
 [connection signal="died" from="Hurtbox" to="." method="_on_hurtbox_died"]
 
 [editable path="Hurtbox"]
-[editable path="Hitbox"]
+[editable path="WeaponHolder/Hitbox"]

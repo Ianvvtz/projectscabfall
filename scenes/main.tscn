@@ -6,10 +6,14 @@
 
 [node name="Main" type="Node2D"]
 
+[node name="SessionManager" type="Node" parent="."]
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_o5qli")
 
 [node name="Player" parent="." instance=ExtResource("2_0wfyh")]
 
-[node name="Enemy" parent="." instance=ExtResource("3_sugp2")]
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Enemy" parent="Enemies" instance=ExtResource("3_sugp2")]
 position = Vector2(246, -145)

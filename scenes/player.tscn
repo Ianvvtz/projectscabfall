@@ -75,6 +75,18 @@ tracks/4/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WeaponHolder/WeaponEffect:self_modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.78431374)]
+}
 
 [sub_resource type="Animation" id="Animation_tuyoq"]
 resource_name = "attack"
@@ -114,7 +126,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [0.0, -0.34906584, 0.34906584, 0.0]
+"values": [0.0, -1.2217304763960306, 0.6981317007977318, 0.0]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -124,9 +136,9 @@ tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"transitions": PackedFloat32Array(-2, -2, -0.5, -0.5),
 "update": 0,
-"values": [0.0, -0.34906584, 0.34906584, 0.0]
+"values": [0.0, -1.2217304763960306, 0.6981317007977318, 0.0]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -136,9 +148,21 @@ tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
+"transitions": PackedFloat32Array(0.5, 2),
 "update": 1,
 "values": [true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WeaponHolder/WeaponEffect:self_modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(0.5, 2, 0.5),
+"update": 0,
+"values": [Color(1, 1, 1, 0.078431375), Color(1, 1, 1, 0.47058824), Color(1, 1, 1, 0.78431374)]
 }
 
 [sub_resource type="Animation" id="Animation_dqkch"]
@@ -195,7 +219,9 @@ texture = ExtResource("3_dqkch")
 shape = SubResource("CircleShape2D_dqkch")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2.5, 2.5)
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+position_smoothing_speed = 4.0
 
 [node name="WeaponHolder" type="Node2D" parent="."]
 

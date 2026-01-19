@@ -1,8 +1,9 @@
 extends CharacterBody2D
 
 @onready var hurtbox: Hurtbox = $Hurtbox
-@onready var hitbox: Hitbox = $Hitbox
+@onready var hitbox: Hitbox = $WeaponHolder/Hitbox
 @onready var anim: AnimationPlayer = $AnimationPlayer
+@onready var attack_range_box: Area2D = $AttackRangeBox
 
 enum Faction {
 	PLAYER,
@@ -31,6 +32,7 @@ var attack_pause_timer: float = 0.0
 var is_attacking: bool = false
 var attack_timer: float = 0.0
 var attack_range: float
+var can_attack_range: float
 var chase_range: float = 200.0
 
 
@@ -42,6 +44,8 @@ func _ready() -> void:
 		attack_range = hitbox.get_shape().radius
 	elif hitbox.get_shape() is RectangleShape2D:
 		attack_range = hitbox.get_shape().size.x
+	if attack_range_box.get_child(0).get_shape() is RectangleShape2D:
+		can_attack_range = attack_range_box.get_child(0).get_shape().size.x
 
 
 func _on_hurtbox_died() -> void:
@@ -65,21 +69,18 @@ func ai_behavior(delta):
 	
 	if attack_pause_timer > 0 and can_attack:
 		anim.play("attack_windup")
-		attack_pause_timer = max(0, attack_pause_timer - delta)
-		if attack_pause_timer <= 0:
-			hitbox.set_active(true)
-		return
+		windup_attack(delta)
 
 
-	if not is_attacking and attack_timer <= 0:
-		if distance_to_player <= attack_range and can_attack:
+	if not is_attacking:
+		if distance_to_player <= can_attack_range and can_attack:
 			start_attack()
 
-	if is_attacking:
-		attack_timer -= delta
-		if attack_timer <= 0:
-			end_attack()
-		return
+	#if is_attacking:
+		#attack_timer -= delta
+		#if attack_timer <= 0:
+			#end_attack()
+		#return
 
 	behavior_timer -= delta
 	if distance_to_player < chase_range:
@@ -110,12 +111,20 @@ func strafe_attack(_delta):
 	#velocity = perpendicular * move_speed * 0.7
 
 # --- Attack Functions ---
+func windup_attack(delta):
+	attack_pause_timer = max(0, attack_pause_timer - delta)
+	if attack_pause_timer <= 0:
+		anim.play("attack")
+	return
+
 func start_attack():
+	print("Starting attack")
 	if not can_attack:
 		return
 	is_attacking = true
 	attack_pause_timer = attack_pause
-	attack_timer = attack_duration
+	#attack_timer = attack_duration
+	#anim.play("attack")
 	# Play wind-up animation here
 	#hitbox.set_active(true)
 	# Optional: play attack animation here

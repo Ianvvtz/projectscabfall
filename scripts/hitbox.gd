@@ -11,7 +11,7 @@ func _ready() -> void:
 	set_collision_mask_value(1, false)
 	if get_parent().get_parent().is_in_group("player"):
 		set_collision_mask_value(4, true)
-	elif get_parent().is_in_group("enemy"):
+	elif get_parent().get_parent().is_in_group("enemy"):
 		set_collision_mask_value(5, true)
 
 

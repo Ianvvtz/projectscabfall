@@ -122,6 +122,7 @@ func start_attack():
 	state = PlayerState.ATTACK
 	attack_timer = attack_cooldown
 	weapon_holder.get_child(0).set_active(true)
+	apply_screen_shake()
 	anim.play("attack")
 
 
@@ -132,9 +133,22 @@ func handle_attack(delta):
 
 func handle_dead():
 	print("Player got hit")
-	get_tree().paused = true
+	#get_tree().paused = true
 	# TODO handle death
 
 
 func _on_hurtbox_died() -> void:
+	apply_screen_shake()
 	state = PlayerState.DEAD
+
+
+func apply_screen_shake(intensity: float = 3.0):
+	var camera = get_viewport().get_camera_2d()
+	if camera:
+		var shake_offset = Vector2(
+			randf_range(-intensity, intensity),
+			randf_range(-intensity, intensity)
+		)
+		camera.offset = shake_offset
+		await get_tree().create_timer(0.1).timeout
+		camera.offset = Vector2.ZERO
