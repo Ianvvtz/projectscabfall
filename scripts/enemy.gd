@@ -11,12 +11,13 @@ enum Faction {
 }
 
 enum Behavior {
+	IDLE,
 	CHASE,
 	STRAFE,
 	DEAD,
 }
 
-var current_behavior: Behavior = Behavior.CHASE
+var current_behavior: Behavior = Behavior.IDLE
 var behavior_timer: float = 0.0
 
 var current_district: Area2D
@@ -38,6 +39,7 @@ var attack_range: float
 var can_attack_range: float
 var chase_range: float = 200.0
 var got_hit: bool = false
+var in_sight: bool = false
 
 
 func _ready() -> void:
@@ -87,7 +89,7 @@ func ai_behavior(delta):
 		if distance_to_player <= can_attack_range and can_attack:
 			start_attack()
 
-	if not current_behavior == Behavior.DEAD: 
+	if in_sight and not current_behavior == Behavior.DEAD:
 		behavior_timer -= delta
 		if distance_to_player < chase_range:
 			current_behavior = Behavior.CHASE
@@ -96,6 +98,8 @@ func ai_behavior(delta):
 			behavior_timer = randf_range(2.0, 4.0)
 
 	match current_behavior:
+		Behavior.IDLE:
+			handle_idle()
 		Behavior.CHASE:
 			chase_player(delta)
 		Behavior.STRAFE:
@@ -104,6 +108,10 @@ func ai_behavior(delta):
 			handle_death()
 
 	move_and_slide()
+
+func handle_idle() -> void:
+	if distance_to_player < 800.0:
+		in_sight = true
 
 
 func chase_player(_delta):

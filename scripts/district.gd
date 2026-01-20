@@ -11,12 +11,14 @@ enum DistrictState {
 
 @export var enemy_scene: PackedScene
 @export var enemies_to_clear: int = 10
+@export var respawn_number: int = 1
 
 var player: CharacterBody2D
 var enemies: Array = []
 var state: DistrictState = DistrictState.BLUE
 var enemies_killed: int = 0
 var spawn_points_group: Array = []
+#var spawned_enemies: bool = false
 
 
 func _ready() -> void:
@@ -41,18 +43,19 @@ func update_visuals() -> void:
 func contest_district() -> void:
 	if state == DistrictState.BLUE:
 		update_visuals()
+		spawn_enemies(enemies_to_clear)
 
 
 func capture_district() -> void:
 	if enemies_killed >= enemies_to_clear and state == DistrictState.CONTESTED:
 		update_visuals()
+		player.set_respawn(respawn_number)
 
 
 func _on_body_entered(body: Node2D) -> void:
 	if body == player:
 		print("player entered")
 		contest_district()
-		spawn_enemies(enemies_to_clear)
 
 
 func enemy_died(district):
@@ -69,20 +72,14 @@ func spawn_enemies(amount: int):
 		var spawn_point: Marker2D = spawn_points_group.pick_random()
 		var new_enemy = enemy_scene.instantiate()
 		call_deferred("add_child", new_enemy)
-		# disable collision briefly
+
 		new_enemy.set_deferred("collision_layer", 0)
 		new_enemy.set_deferred("collision_mask", 0)
 
-		# random offset inside radius
 		var angle := randf() * TAU
 		var dist := randf() * spawn_radius
 		var offset := Vector2(cos(angle), sin(angle)) * dist
 
-		new_enemy.call_deferred(
-			"set_global_position",
-			spawn_point.global_position + offset
-		)
-		
-		#new_enemy.call_deferred("set_global_position", spawn_point.global_position)
+		new_enemy.call_deferred("set_global_position", spawn_point.global_position + offset)
 		new_enemy.current_district = self
 		new_enemy.call_deferred("_enable_collision")

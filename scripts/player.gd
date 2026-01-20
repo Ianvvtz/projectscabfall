@@ -44,12 +44,14 @@ var received_boost: bool = false
 var boost_time: float = 5.0
 
 var is_invulnerable := false
+var respawn_location: Marker2D
 
 
 func _ready() -> void:
 	if faction == Faction.PLAYER:
 		hurtbox.set_collision_layer_value(5, true)
 	state = PlayerState.MOVE
+	set_respawn(1)
 
 
 func _physics_process(_delta: float) -> void:
@@ -148,8 +150,7 @@ func handle_attack(delta):
 
 func handle_dead():
 	print("Player got hit")
-	get_tree().paused = true
-	# TODO handle death
+	reset_position()
 
 
 func _on_hurtbox_died() -> void:
@@ -176,3 +177,19 @@ func speed_boost() -> void:
 		speed += boost_speed
 	else:
 		return
+
+
+func set_respawn(number: int) -> void:
+	match number:
+		1:
+			respawn_location = $"../Districts/SpawnLocation1"
+		2:
+			respawn_location = $"../Districts/SpawnLocation2"
+		3:
+			respawn_location = $"../Districts/SpawnLocation3"
+
+
+func reset_position() -> void:
+	anim.play("RESET")
+	global_position = respawn_location.global_position
+	state = PlayerState.MOVE

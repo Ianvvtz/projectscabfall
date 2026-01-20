@@ -219,33 +219,39 @@ libraries = {
 [node name="SpawnPoints" type="Node2D" parent="."]
 
 [node name="Marker2D" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(1107, -524)
+position = Vector2(-646, -492)
 
 [node name="Marker2D2" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(1102, -384)
+position = Vector2(-98, -478)
 
 [node name="Marker2D3" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(1102, -231)
+position = Vector2(457, -462)
 
 [node name="Marker2D4" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(1110, -49)
+position = Vector2(924, -452)
 
 [node name="Marker2D5" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(1123, 117)
+position = Vector2(-630, -3)
 
 [node name="Marker2D6" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(1128, 273)
+position = Vector2(-102, 5)
 
 [node name="Marker2D7" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(1120, 447)
+position = Vector2(473, 20)
 
 [node name="Marker2D8" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(1139, 563)
+position = Vector2(935, 21)
 
 [node name="Marker2D9" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(1141, 677)
+position = Vector2(-625, 525)
 
 [node name="Marker2D10" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(1141, 677)
+position = Vector2(-130, 538)
+
+[node name="Marker2D11" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(459, 547)
+
+[node name="Marker2D12" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(918, 562)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
