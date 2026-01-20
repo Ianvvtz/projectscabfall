@@ -246,6 +246,7 @@ collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_3vyb7")
 speed = 120.0
+sprint_multiplier = 1.5
 dodge_distance = 150.0
 dodge_duration = 0.3
 

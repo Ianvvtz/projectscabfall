@@ -157,12 +157,12 @@ func handle_attack(delta):
 
 func handle_dead():
 	print("Player got hit")
-	
 	reset_position()
 
 
 func _on_hurtbox_died() -> void:
 	apply_screen_shake()
+	hit_stop(0.1, 0.1)
 	state = PlayerState.DEAD
 
 
@@ -176,6 +176,13 @@ func apply_screen_shake(intensity: float = 8.0):
 		camera.offset = shake_offset
 		await get_tree().create_timer(0.1).timeout
 		camera.offset = Vector2.ZERO
+
+
+func hit_stop(duration: float = 0.05, slow_motion: float = 0.0) -> void:
+	Engine.time_scale = slow_motion
+	await get_tree().create_timer(duration).timeout
+	await get_tree().process_frame
+	Engine.time_scale = 1.0
 
 
 func speed_boost() -> void:

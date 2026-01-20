@@ -89,8 +89,8 @@ func ai_behavior(delta: float) -> void:
 		Behavior.ATTACK:
 			velocity = Vector2.ZERO
 			handle_attack(delta)
-		Behavior.DEAD:
-			velocity = Vector2.ZERO
+		#Behavior.DEAD:
+			#velocity = Vector2.ZERO
 	move_and_slide()
 
 
@@ -165,11 +165,16 @@ func _on_hurtbox_died() -> void:
 	if got_hit:
 		return
 	got_hit = true
-	Signalbus.enemy_died.emit(current_district)
 	can_attack = false
+	var hit_direction = (global_position - player.global_position).normalized()
+	velocity = hit_direction * 100.0
+	player.hit_stop(0.035, 0.3)
 	anim.play("hit")
 	set_state(Behavior.DEAD)
+	await get_tree().create_timer(0.25).timeout
+	velocity = Vector2.ZERO
 	player.speed_boost()
+	Signalbus.enemy_died.emit(current_district)
 
 
 func enemy_die() -> void:
@@ -197,6 +202,7 @@ func compute_group_offset() -> Vector2:
 		if distance < group_spacing:
 			offset += dir.normalized() * (group_spacing - distance)
 	return offset
+
 
 func compute_flank_offset() -> Vector2:
 	var to_player = (player.global_position - global_position).normalized()
