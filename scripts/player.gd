@@ -59,7 +59,14 @@ func _physics_process(_delta: float) -> void:
 		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
 		Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
 		).normalized()
-	look_at(get_global_mouse_position())
+	var look_dir := Vector2.RIGHT.rotated(rotation)
+	var look_target := global_position + look_dir * 100
+	if state == PlayerState.MOVE:
+		look_target = look_target.lerp(get_global_mouse_position(), 0.2)
+		look_at(look_target)
+	elif state == PlayerState.ATTACK:
+		look_target = look_target.lerp(get_global_mouse_position(), 0.05)
+		look_at(look_target)
 
 
 func _process(delta: float) -> void:
@@ -85,8 +92,6 @@ func handle_move(delta) -> void:
 	if is_dodging:
 		handle_dodge(delta)
 		return
-	
-	anim.play("move")
 
 	if Input.is_action_just_pressed("left_click") and attack_timer <= 0:
 		start_attack()
@@ -100,8 +105,10 @@ func handle_move(delta) -> void:
 		current_speed *= sprint_multiplier
 	
 	if input_vector != Vector2.ZERO:
+		anim.play("move")
 		last_move_direction = input_vector.normalized() # Or set this to dodge left
-	
+	else:
+		anim.play("RESET")
 	velocity = input_vector * current_speed
 	move_and_slide()
 
@@ -150,6 +157,7 @@ func handle_attack(delta):
 
 func handle_dead():
 	print("Player got hit")
+	
 	reset_position()
 
 

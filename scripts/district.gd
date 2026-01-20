@@ -18,7 +18,6 @@ var enemies: Array = []
 var state: DistrictState = DistrictState.BLUE
 var enemies_killed: int = 0
 var spawn_points_group: Array = []
-#var spawned_enemies: bool = false
 
 
 func _ready() -> void:
