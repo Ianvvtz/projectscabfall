@@ -301,7 +301,7 @@ size = Vector2(21.5, 29)
 
 [node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 2
-collision_mask = 6
+collision_mask = 7
 motion_mode = 1
 script = ExtResource("1_md0e3")
 faction = 1
@@ -311,7 +311,7 @@ attack_pause = 0.2
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 color = Color(0.17254902, 0.2901961, 0.4862745, 1)
-energy = 0.5
+energy = 0.3
 shadow_enabled = true
 shadow_color = Color(0, 0, 0, 1)
 texture = ExtResource("2_nenq2")

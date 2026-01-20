@@ -1,10 +1,62 @@
-[gd_scene load_steps=8 format=3 uid="uid://ci70q6cnnrjtl"]
+[gd_scene load_steps=9 format=3 uid="uid://ci70q6cnnrjtl"]
 
 [ext_resource type="Script" uid="uid://dytxuhx5fwxt" path="res://scripts/district.gd" id="1_cicg1"]
+[ext_resource type="PackedScene" uid="uid://t0wtkwpgo5tu" path="res://scenes/enemy.tscn" id="2_g2iuc"]
 [ext_resource type="Texture2D" uid="uid://ffas4d7s7o8o" path="res://assets/images/districts/district all.png" id="3_g2iuc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bpw4k"]
 size = Vector2(2500, 1500)
+
+[sub_resource type="Animation" id="Animation_s4ieg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DistrictSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DistrictSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DistrictSprite:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DistrictSpriteBlue:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_cicg1"]
 resource_name = "change_to_red"
@@ -124,57 +176,6 @@ tracks/3/keys = {
 "values": [false]
 }
 
-[sub_resource type="Animation" id="Animation_s4ieg"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("DistrictSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("DistrictSprite:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("DistrictSprite:self_modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("DistrictSpriteBlue:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g2iuc"]
 _data = {
 &"RESET": SubResource("Animation_s4ieg"),
@@ -186,6 +187,7 @@ _data = {
 collision_layer = 32
 collision_mask = 6
 script = ExtResource("1_cicg1")
+enemy_scene = ExtResource("2_g2iuc")
 
 [node name="DistrictSpriteRed" type="Sprite2D" parent="."]
 texture = ExtResource("3_g2iuc")
@@ -213,5 +215,37 @@ shape = SubResource("RectangleShape2D_bpw4k")
 libraries = {
 &"": SubResource("AnimationLibrary_g2iuc")
 }
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(1107, -524)
+
+[node name="Marker2D2" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(1102, -384)
+
+[node name="Marker2D3" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(1102, -231)
+
+[node name="Marker2D4" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(1110, -49)
+
+[node name="Marker2D5" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(1123, 117)
+
+[node name="Marker2D6" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(1128, 273)
+
+[node name="Marker2D7" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(1120, 447)
+
+[node name="Marker2D8" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(1139, 563)
+
+[node name="Marker2D9" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(1141, 677)
+
+[node name="Marker2D10" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(1141, 677)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

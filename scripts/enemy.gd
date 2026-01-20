@@ -140,3 +140,11 @@ func end_attack():
 
 func handle_death() -> void:
 	velocity = Vector2.ZERO
+
+
+func _enable_collision():
+	await get_tree().physics_frame
+	set_collision_layer_value(2, true)
+	set_collision_mask_value(1, true)
+	set_collision_mask_value(2, true)
+	set_collision_mask_value(3, true)
