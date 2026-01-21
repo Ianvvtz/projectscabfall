@@ -156,13 +156,14 @@ func handle_attack(delta):
 
 
 func handle_dead():
-	print("Player got hit")
-	reset_position()
+	anim.play("die")
 
 
 func _on_hurtbox_died() -> void:
+	print("Player got hit")
+	weapon_holder.get_child(0).set_active(false)
 	apply_screen_shake()
-	hit_stop(0.1, 0.1)
+	hit_stop(0.1, 0.15)
 	state = PlayerState.DEAD
 
 
