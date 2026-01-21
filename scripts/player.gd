@@ -104,6 +104,9 @@ func handle_move(delta) -> void:
 	var current_speed = speed
 	if Input.is_action_pressed("sprint"):
 		current_speed *= sprint_multiplier
+		anim.speed_scale = 2.0
+	else:
+		anim.speed_scale = 1.0
 	
 	if input_vector != Vector2.ZERO:
 		anim.play("move")

@@ -9,6 +9,9 @@
 
 [node name="Main" type="Node2D"]
 
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.59717613, 0.59717613, 0.5971761, 1)
+
 [node name="SessionManager" type="Node" parent="."]
 script = ExtResource("1_jyhfs")
 
@@ -32,31 +35,13 @@ respawn_number = 3
 position = Vector2(-1324, 0)
 texture = ExtResource("2_jyhfs")
 
-[node name="PointLight2D" type="PointLight2D" parent="Districts/Border" groups=["border_lights"]]
-position = Vector2(74, 2.2888184e-05)
-scale = Vector2(0.49999952, 23.4375)
-color = Color(0.72156864, 0, 0, 1)
-texture = ExtResource("5_tbgi4")
-
 [node name="Border2" type="Sprite2D" parent="Districts"]
 position = Vector2(1324.5, 0)
 texture = ExtResource("2_jyhfs")
 
-[node name="PointLight2D" type="PointLight2D" parent="Districts/Border2" groups=["border_lights"]]
-position = Vector2(74, 2.2888184e-05)
-scale = Vector2(0.49999952, 23.4375)
-color = Color(0.72156864, 0, 0, 1)
-texture = ExtResource("5_tbgi4")
-
 [node name="Border3" type="Sprite2D" parent="Districts"]
 position = Vector2(3973.5, 0)
 texture = ExtResource("2_jyhfs")
-
-[node name="PointLight2D" type="PointLight2D" parent="Districts/Border3" groups=["border_lights"]]
-position = Vector2(74, 2.2888184e-05)
-scale = Vector2(0.49999952, 23.4375)
-color = Color(0.72156864, 0, 0, 1)
-texture = ExtResource("5_tbgi4")
 
 [node name="SpawnLocation1" type="Marker2D" parent="Districts" groups=["respawn_location"]]
 position = Vector2(-1323, 0)
@@ -77,9 +62,11 @@ script = ExtResource("4_o6xl0")
 [node name="PointLight2D" type="PointLight2D" parent="Checkpoint"]
 scale = Vector2(0.1, 0.1)
 color = Color(0.72050196, 2.4268566e-06, 5.393015e-07, 1)
-energy = 3.0
+energy = 2.5
 texture = ExtResource("5_tbgi4")
-texture_scale = 8.0
+texture_scale = 2.5
 
 [node name="Player" parent="." instance=ExtResource("2_0wfyh")]
 position = Vector2(-1323, 0)
+
+[node name="UI" type="CanvasLayer" parent="."]
