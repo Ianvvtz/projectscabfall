@@ -360,7 +360,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xwavj"]
-size = Vector2(29.75, 29)
+size = Vector2(34.75, 29)
 
 [node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 2
@@ -370,7 +370,7 @@ script = ExtResource("1_md0e3")
 faction = 1
 attack_pause = 0.2
 attack_duration = 0.3
-chase_range = 250.0
+chase_range = 300.0
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 color = Color(0.2724064, 0.35235858, 0.61427253, 1)
@@ -422,7 +422,7 @@ libraries = {
 [node name="AttackRangeBox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRangeBox"]
-position = Vector2(22.125, 0)
+position = Vector2(27, 0)
 shape = SubResource("RectangleShape2D_xwavj")
 
 [connection signal="died" from="Hurtbox" to="." method="_on_hurtbox_died"]

@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var weapon_holder: Node2D = $WeaponHolder
 @onready var anim: AnimationPlayer = $AnimationPlayer
 @onready var hurtbox: Hurtbox = $Hurtbox
+@onready var checkpoint: Node2D = $"../Checkpoint"
 
 #Player Stats
 @export var speed: float = 200.0
@@ -39,9 +40,9 @@ var is_dodging: bool = false
 var dodge_time_left: float
 var input_vector: Vector2 = Vector2.ZERO
 var last_move_direction: Vector2
-var boost_speed: float = 100.0
+var boost_speed: float = 50.0
 var received_boost: bool = false
-var boost_time: float = 5.0
+var boost_time: float = 4.0
 
 var is_invulnerable := false
 var respawn_location: Marker2D
@@ -199,10 +200,13 @@ func set_respawn(number: int) -> void:
 	match number:
 		1:
 			respawn_location = $"../Districts/SpawnLocation1"
+			checkpoint.global_position = respawn_location.global_position
 		2:
 			respawn_location = $"../Districts/SpawnLocation2"
+			checkpoint.global_position = respawn_location.global_position
 		3:
 			respawn_location = $"../Districts/SpawnLocation3"
+			checkpoint.global_position = respawn_location.global_position
 
 
 func reset_position() -> void:

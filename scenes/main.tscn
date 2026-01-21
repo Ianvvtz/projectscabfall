@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://hdv3jrgdaea5"]
+[gd_scene load_steps=7 format=3 uid="uid://hdv3jrgdaea5"]
 
 [ext_resource type="Script" uid="uid://b81ynqhvb6j1m" path="res://scripts/session_manager.gd" id="1_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://ci70q6cnnrjtl" path="res://scenes/district.tscn" id="1_sugp2"]
 [ext_resource type="PackedScene" uid="uid://5rnun75286p7" path="res://scenes/player.tscn" id="2_0wfyh"]
 [ext_resource type="Texture2D" uid="uid://ba7dosfds85xk" path="res://assets/images/districts/district border.png" id="2_jyhfs"]
+[ext_resource type="Script" uid="uid://bw31qrs22kill" path="res://scripts/checkpoint.gd" id="4_o6xl0"]
+[ext_resource type="Texture2D" uid="uid://hqcjkg7dp0o3" path="res://assets/images/lightsource1.png" id="5_tbgi4"]
 
 [node name="Main" type="Node2D"]
 
@@ -21,13 +23,40 @@ position = Vector2(2649, 0)
 enemies_to_clear = 40
 respawn_number = 3
 
+[node name="District3" parent="Districts" instance=ExtResource("1_sugp2")]
+position = Vector2(5298, 0)
+enemies_to_clear = 40
+respawn_number = 3
+
 [node name="Border" type="Sprite2D" parent="Districts"]
 position = Vector2(-1324, 0)
 texture = ExtResource("2_jyhfs")
 
+[node name="PointLight2D" type="PointLight2D" parent="Districts/Border" groups=["border_lights"]]
+position = Vector2(74, 2.2888184e-05)
+scale = Vector2(0.49999952, 23.4375)
+color = Color(0.72156864, 0, 0, 1)
+texture = ExtResource("5_tbgi4")
+
 [node name="Border2" type="Sprite2D" parent="Districts"]
 position = Vector2(1324.5, 0)
 texture = ExtResource("2_jyhfs")
+
+[node name="PointLight2D" type="PointLight2D" parent="Districts/Border2" groups=["border_lights"]]
+position = Vector2(74, 2.2888184e-05)
+scale = Vector2(0.49999952, 23.4375)
+color = Color(0.72156864, 0, 0, 1)
+texture = ExtResource("5_tbgi4")
+
+[node name="Border3" type="Sprite2D" parent="Districts"]
+position = Vector2(3973.5, 0)
+texture = ExtResource("2_jyhfs")
+
+[node name="PointLight2D" type="PointLight2D" parent="Districts/Border3" groups=["border_lights"]]
+position = Vector2(74, 2.2888184e-05)
+scale = Vector2(0.49999952, 23.4375)
+color = Color(0.72156864, 0, 0, 1)
+texture = ExtResource("5_tbgi4")
 
 [node name="SpawnLocation1" type="Marker2D" parent="Districts" groups=["respawn_location"]]
 position = Vector2(-1323, 0)
@@ -38,7 +67,19 @@ position = Vector2(1330, 0)
 [node name="SpawnLocation3" type="Marker2D" parent="Districts" groups=["respawn_location"]]
 position = Vector2(3969, 0)
 
+[node name="SpawnLocation4" type="Marker2D" parent="Districts" groups=["respawn_location"]]
+position = Vector2(6643, 0)
+
+[node name="Checkpoint" type="Node2D" parent="."]
+position = Vector2(-1323, 0)
+script = ExtResource("4_o6xl0")
+
+[node name="PointLight2D" type="PointLight2D" parent="Checkpoint"]
+scale = Vector2(0.1, 0.1)
+color = Color(0.72050196, 2.4268566e-06, 5.393015e-07, 1)
+energy = 3.0
+texture = ExtResource("5_tbgi4")
+texture_scale = 8.0
+
 [node name="Player" parent="." instance=ExtResource("2_0wfyh")]
 position = Vector2(-1323, 0)
-
-[node name="Enemies" type="Node2D" parent="."]
