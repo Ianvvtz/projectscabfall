@@ -49,6 +49,7 @@ func capture_district() -> void:
 	if enemies_killed >= enemies_to_clear and state == DistrictState.CONTESTED:
 		update_visuals()
 		player.set_respawn(respawn_number)
+		player.speed_increase()
 
 
 func _on_body_entered(body: Node2D) -> void:

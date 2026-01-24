@@ -190,6 +190,10 @@ func hit_stop(duration: float = 0.05, slow_motion: float = 0.0) -> void:
 	Engine.time_scale = 1.0
 
 
+func speed_increase() -> void:
+	speed += 10
+
+
 func speed_boost() -> void:
 	if not received_boost:
 		received_boost = true
