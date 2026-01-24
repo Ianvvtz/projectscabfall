@@ -167,7 +167,7 @@ func _on_hurtbox_died() -> void:
 	print("Player got hit")
 	weapon_holder.get_child(0).set_active(false)
 	apply_screen_shake()
-	hit_stop(0.1, 0.15)
+	hit_stop(0.1, 0.2)
 	state = PlayerState.DEAD
 
 

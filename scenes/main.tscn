@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://hdv3jrgdaea5"]
+[gd_scene load_steps=8 format=3 uid="uid://hdv3jrgdaea5"]
 
 [ext_resource type="Script" uid="uid://b81ynqhvb6j1m" path="res://scripts/session_manager.gd" id="1_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://ci70q6cnnrjtl" path="res://scenes/district.tscn" id="1_sugp2"]
 [ext_resource type="PackedScene" uid="uid://5rnun75286p7" path="res://scenes/player.tscn" id="2_0wfyh"]
 [ext_resource type="Texture2D" uid="uid://ba7dosfds85xk" path="res://assets/images/districts/district border.png" id="2_jyhfs"]
 [ext_resource type="Script" uid="uid://bw31qrs22kill" path="res://scripts/checkpoint.gd" id="4_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://c6a5ho0yoe6w7" path="res://scenes/buildings/house_1.tscn" id="4_tipki"]
 [ext_resource type="Texture2D" uid="uid://hqcjkg7dp0o3" path="res://assets/images/lightsource1.png" id="5_tbgi4"]
 
 [node name="Main" type="Node2D"]
@@ -54,6 +55,11 @@ position = Vector2(3969, 0)
 
 [node name="SpawnLocation4" type="Marker2D" parent="Districts" groups=["respawn_location"]]
 position = Vector2(6643, 0)
+
+[node name="Buildings" type="Node2D" parent="Districts"]
+
+[node name="StaticBody2D" parent="Districts/Buildings" instance=ExtResource("4_tipki")]
+position = Vector2(-1025, -327)
 
 [node name="Checkpoint" type="Node2D" parent="."]
 position = Vector2(-1323, 0)

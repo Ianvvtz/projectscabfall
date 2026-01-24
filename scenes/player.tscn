@@ -388,12 +388,12 @@ colors = PackedColorArray(0.72156864, 0, 0, 1, 0.72156864, 0, 0, 0)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 4
-collision_mask = 2
+collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_3vyb7")
-speed = 120.0
+speed = 80.0
 sprint_multiplier = 1.5
-dodge_distance = 150.0
+dodge_distance = 120.0
 dodge_duration = 0.3
 attack_cooldown = 0.4
 
