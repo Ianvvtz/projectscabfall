@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://c7yvv1bi4ew6h" path="res://scripts/player.gd" id="1_3vyb7"]
 [ext_resource type="PackedScene" uid="uid://2giwd861bira" path="res://scenes/hurtbox.tscn" id="2_g2els"]
-[ext_resource type="Texture2D" uid="uid://hxth2crb7hm7" path="res://assets/images/player/Worker.svg" id="3_dqkch"]
+[ext_resource type="Texture2D" uid="uid://uefgmlmu17d7" path="res://assets/images/player/Worker.png" id="3_fjrip"]
 [ext_resource type="PackedScene" uid="uid://upqtu0gw0byx" path="res://scenes/hitbox.tscn" id="3_qhqgy"]
-[ext_resource type="Texture2D" uid="uid://bvodwpyh2dfuj" path="res://assets/images/weapons/player weapons/hammer.svg" id="5_fjrip"]
 [ext_resource type="Texture2D" uid="uid://hqcjkg7dp0o3" path="res://assets/images/lightsource1.png" id="5_qlg0r"]
+[ext_resource type="Texture2D" uid="uid://d050xk5b37t7c" path="res://assets/images/weapons/player weapons/hammer.png" id="5_smehm"]
 [ext_resource type="Texture2D" uid="uid://bhybejkh1nem6" path="res://assets/images/weapons/effects/slash_effect.svg" id="6_fjrip"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dqkch"]
@@ -399,14 +399,13 @@ attack_cooldown = 0.4
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 color = Color(0.72156864, 0, 0, 1)
-energy = 0.4
+energy = 0.3
 shadow_color = Color(0, 0, 0, 1)
 texture = ExtResource("5_qlg0r")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-rotation = 1.5707964
 scale = Vector2(0.3, 0.3)
-texture = ExtResource("3_dqkch")
+texture = ExtResource("3_fjrip")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_dqkch")
@@ -428,7 +427,7 @@ shape = SubResource("RectangleShape2D_qlg0r")
 [node name="WeaponSprite" type="Sprite2D" parent="WeaponHolder"]
 position = Vector2(18, 9)
 scale = Vector2(0.3, 0.3)
-texture = ExtResource("5_fjrip")
+texture = ExtResource("5_smehm")
 
 [node name="WeaponEffect" type="Sprite2D" parent="WeaponHolder"]
 visible = false
