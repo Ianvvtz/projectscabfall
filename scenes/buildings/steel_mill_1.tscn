@@ -1,0 +1,61 @@
+[gd_scene load_steps=4 format=3 uid="uid://bixbl31ibco0g"]
+
+[ext_resource type="Texture2D" uid="uid://j5a2r5lmvmq6" path="res://assets/images/buildings/factory/Steel_Mill_1.png" id="1_gjnvv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ghgk3"]
+size = Vector2(3338, 509)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3jt0b"]
+radius = 70.00714
+
+[node name="StaticBody2D" type="StaticBody2D"]
+scale = Vector2(0.5, 0.5)
+collision_mask = 6
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_gjnvv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -39.5)
+shape = SubResource("RectangleShape2D_ghgk3")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(-1354, 223)
+shape = SubResource("CircleShape2D_3jt0b")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(-1071, 223)
+shape = SubResource("CircleShape2D_3jt0b")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="."]
+position = Vector2(-787, 223)
+shape = SubResource("CircleShape2D_3jt0b")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="."]
+position = Vector2(-503, 223)
+shape = SubResource("CircleShape2D_3jt0b")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="."]
+position = Vector2(-220, 223)
+shape = SubResource("CircleShape2D_3jt0b")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="."]
+position = Vector2(64, 223)
+shape = SubResource("CircleShape2D_3jt0b")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="."]
+position = Vector2(348, 223)
+shape = SubResource("CircleShape2D_3jt0b")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="."]
+position = Vector2(631, 223)
+shape = SubResource("CircleShape2D_3jt0b")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="."]
+position = Vector2(915, 223)
+shape = SubResource("CircleShape2D_3jt0b")
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="."]
+position = Vector2(1199, 223)
+shape = SubResource("CircleShape2D_3jt0b")
