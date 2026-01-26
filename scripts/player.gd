@@ -211,9 +211,6 @@ func set_respawn(number: int) -> void:
 		2:
 			respawn_location = $"../Districts/SpawnLocation2"
 			checkpoint.global_position = respawn_location.global_position
-		3:
-			respawn_location = $"../Districts/SpawnLocation3"
-			checkpoint.global_position = respawn_location.global_position
 
 
 func reset_position() -> void:

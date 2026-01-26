@@ -217,3 +217,4 @@ func _enable_collision():
 	set_collision_mask_value(1, true)
 	set_collision_mask_value(2, true)
 	set_collision_mask_value(3, true)
+	set_collision_mask_value(7, true)
